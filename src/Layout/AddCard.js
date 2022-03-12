@@ -48,7 +48,7 @@ const AddCard = () => {
   }, [deckId]);
 
   const handleSubmit = async (e) => {
-    e.preDefault();
+    e.preventDefault();
     await createCard(deckId, newCardData);
     setNewCardData(initialFormState);
     history.go(0);
@@ -61,10 +61,10 @@ const AddCard = () => {
     };
   }, []);
 
-  const handleChange = ({ el }) => {
+  const handleChange = ({ target }) => {
     setNewCardData((currentState) => ({
       ...currentState,
-      [el.name]: el.value,
+      [target.name]: target.value,
     }));
   };
 
@@ -87,7 +87,7 @@ const AddCard = () => {
         </ol>
       </nav>
       <h1 className='my-4 '>
-        <h2>'{deck.name}': </h2><span>Add card</span>
+        <span>'{deck.name}': </span><span>Add card</span>
       </h1>
       <CardForm
         handleChange={handleChange}

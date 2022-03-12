@@ -13,10 +13,16 @@ const CreateDeck = () => {
   const [formData, setFormData] = useState(initialFormState);
 
 
-  const handleChange = ({ el }) => {
+  const handleChangeName = ({target}) => {
     setFormData((currentFormData) => ({
       ...currentFormData,
-      [el.name]: el.value,
+      name: target.value,
+    }));
+  };
+  const handleChangeDescription = ({target}) => {
+    setFormData((currentFormData) => ({
+      ...currentFormData,
+      description: target.value,
     }));
   };
 
@@ -51,7 +57,7 @@ const CreateDeck = () => {
             className='form-control'
             type='text'
             placeholder='Deck Name'
-            onChange={handleChange}
+            onChange={handleChangeName}
             value={formData.name}
             required
           ></input>
@@ -64,7 +70,7 @@ const CreateDeck = () => {
             name='description'
             rows='4'
             placeholder='Brief description of the deck'
-            onChange={handleChange}
+            onChange={handleChangeDescription}
             value={formData.description}
             required
           ></textarea>
