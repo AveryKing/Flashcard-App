@@ -38,16 +38,25 @@ const EditDeck = () => {
     };
   }, [deckId]);
 
-  const handleChange = ({ el }) => {
+  const handleChangeName = ({ target }) => {
     setEditDeckFormData((currentState) => ({
       ...currentState,
-      [el.name]: el.value,
+      name: target.value,
+    }));
+  };
+
+  const handleChangeDescription = ({ target }) => {
+    setEditDeckFormData((currentState) => ({
+      ...currentState,
+      description: target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(editDeckFormData)
     const response = await updateDeck(editDeckFormData);
+    console.log(response);
     history.push(`/decks/${response.id}`);
   };
 
@@ -70,7 +79,7 @@ const EditDeck = () => {
           </li>
         </ol>
       </nav>
-      <form>
+      <form onSubmit={handleSubmit}>
         <h2 >Edit Deck</h2>
         <div className='form-group'>
           <label htmlFor='name'>Name</label>
@@ -80,7 +89,7 @@ const EditDeck = () => {
             className='form-control'
             type='text'
             placeholder='Deck Name'
-            onChange={handleChange}
+            onChange={handleChangeName}
             value={editDeckFormData.name}
             required
           ></input>
@@ -93,7 +102,7 @@ const EditDeck = () => {
             name='description'
             rows='5'
             placeholder='Brief description of the deck'
-            onChange={handleChange}
+            onChange={handleChangeDescription}
             value={editDeckFormData.description}
             required
           ></textarea>
@@ -110,7 +119,6 @@ const EditDeck = () => {
         <button
           type='submit'
           className='btn btn-primary'
-          onSubmit={handleSubmit}
         >
           Submit
         </button>

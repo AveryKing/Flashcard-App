@@ -65,15 +65,15 @@ const EditCard = () => {
     };
   }, [cardId]);
 
-  const handleChange = ({ el }) => {
+  const handleChange = ({ target }) => {
     setEditCard((currentState) => ({
       ...currentState,
-      [el.name]: el.value,
+      [target.name]: target.value,
     }));
   };
 
   const handleSubmit = async (e) => {
-    e.preDefault();
+    e.preventDefault();
     await updateCard(editCard);
     setEditCard(initialCardState);
     history.push(`/decks/${deckId}`);
